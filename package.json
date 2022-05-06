@@ -1,0 +1,13 @@
+{
+  "name": "challenge-backend-node",
+  "version": "1.0.0",
+  "description": "Challenge alkemy",
+  "main": "index.js",
+  "scripts": {
+    "run": "node index",
+    "dev": "nodemon index"
+  },
+  "keywords": [],
+  "author": "jfilippo04@gmail.com",
+  "license": "ISC"
+}
