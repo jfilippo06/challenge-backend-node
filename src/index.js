@@ -1,8 +1,4 @@
-const express = require("express");
-require('dotenv').config()
-require('./database/db')
-
-const app = express()
+app = require('./app')
 
 app.use('/auth', require('./routes/auth'))
 app.use('/characters', require('./routes/characters'))

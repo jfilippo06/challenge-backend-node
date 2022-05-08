@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "run": "node index",
-    "dev": "nodemon index"
+    "dev": "nodemon src/index"
   },
   "keywords": [],
   "author": "jfilippo04@gmail.com",
