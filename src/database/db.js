@@ -1,4 +1,5 @@
 const {Sequelize} = require('sequelize')
+const User = require('../models/User')
 
 const sequelize = new Sequelize({
     dialect: 'sqlite',
@@ -7,4 +8,7 @@ const sequelize = new Sequelize({
     .then(console.log('Connection has been established successfully'))
     .catch(e => console.log(`Unable to connect to the database: ${e}`))
 
-module.exports = sequelize
+async function main(){
+    await User.sync()
+}
+main()
