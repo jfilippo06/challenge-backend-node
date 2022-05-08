@@ -5,26 +5,25 @@ const usuarioSchema = new Schema({
     userName: {
         type: String,
         lowercase: true,
-        required: true
+        required: true,
     },
     email: {
         type: String,
         lowercase: true,
         required: true,
         unique: true,
-        index: {unique: true}
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
     tokenConfirm: {
         type: String,
-        default: null
+        default: null,
     },
     cuentaConfirmada: {
         type: Boolean,
-        default: false
+        default: false,
     },
 })
 
