@@ -2,27 +2,27 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose
 
 const personajeSchema = new Schema({
-    Imagen: {
+    imagen: {
         type: String,
         required: true, 
     },
-    Nombre: {
+    nombre: {
         type: String,
         required: true,
     },
-    Edad: {
+    edad: {
         type: String,
         required: true,
     },
-    Peso: {
+    peso: {
         type: String,
         required: true,
     },
-    Historia: {
+    historia: {
         type: String,
         required: true,
     },
-    Pelicula: [{
+    peliculas: [{
         type: Schema.Types.ObjectId,
         ref: 'Pelicula',
     }],
