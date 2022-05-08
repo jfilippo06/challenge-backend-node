@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 const {Schema} = mongoose
 
-const PersonajeSchema = new Schema({
-    imagen: {
-        
+const personajeSchema = new Schema({
+    Imagen: {
+        type: String,
+        required: true, 
     },
     Nombre: {
         type: String,
@@ -24,8 +25,7 @@ const PersonajeSchema = new Schema({
     Pelicula: [{
         type: Schema.Types.ObjectId,
         ref: 'Pelicula',
-        required: true,
     }],
 })
 
-module.exports = mongoose.model('Personaje',PersonajeSchema)
+module.exports = mongoose.model('Personaje',personajeSchema)
