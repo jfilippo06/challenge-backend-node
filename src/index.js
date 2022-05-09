@@ -3,7 +3,6 @@ import 'dotenv/config'
 import {sequelize} from './database/db.js'
 import './models/User.js'
 
-
 async function main(){
     try {
         await sequelize.authenticate()
