@@ -1,6 +1,10 @@
-const express = require("express"); 
+import express from "express"
 const app = express()
+import auth from './routes/auth.js'
 
-app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+app.use('/auth', auth)
+// app.use('/characters')
+// app.use('/movies')
 
-module.exports = app
+export default app

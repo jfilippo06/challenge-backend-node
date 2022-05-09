@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Challenge alkemy",
   "main": "index.js",
+  "type" : "module",
   "scripts": {
     "run": "node index",
     "dev": "nodemon src/index"

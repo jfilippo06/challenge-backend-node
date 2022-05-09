@@ -1,9 +1,13 @@
-const welcome = (req,res) => {
+export const welcome = (req,res) => {
     return res.json({
         "API REST": "WELCOMEN"
     })
 }
 
-module.exports = {
-    welcome
+export const register = async (req,res) => {
+    const {user} = req.body
+    const usuario = await User.create({
+        userName : user
+    })
+    res.send(usuario)
 }
