@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Challenge alkemy",
   "main": "index.js",
-  "type" : "module",
   "scripts": {
     "run": "node index",
     "dev": "nodemon src/index"
@@ -18,6 +17,7 @@
     "sqlite3": "^5.0.8"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "sequelize-cli": "^6.4.1"
   }
 }
