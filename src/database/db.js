@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
 async function main(){
     try {
         await sequelize.authenticate()
-        // await sequelize.sync({})
+        await sequelize.sync()
     } catch (error) {
         console.log(error)
     }
@@ -16,3 +16,5 @@ async function main(){
 main()
 
 module.exports = sequelize
+
+// require('../models/User')

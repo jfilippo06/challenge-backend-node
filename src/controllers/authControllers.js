@@ -1,3 +1,5 @@
+const User = require("../models/User")
+
 const welcome = (req,res) => {
     return res.json({
         "API REST": "WELCOMEN"
@@ -5,10 +7,12 @@ const welcome = (req,res) => {
 }
 
 const register = async (req,res) => {
-    const {user} = req.body
+    const {userName,email} = req.body
     const usuario = await User.create({
-        userName : user
+        userName : userName,
+        email: email
     })
+    await usuario.save()
     res.send(usuario)
 }
 
