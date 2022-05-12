@@ -9,10 +9,9 @@ const welcome = (req,res) => {
 const register = async (req,res) => {
     const {userName,email} = req.body
     const usuario = await User.create({
-        userName : userName,
-        email: email
+        userName,
+        email
     })
-    await usuario.save()
     res.send(usuario)
 }
 

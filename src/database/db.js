@@ -1,4 +1,5 @@
 const {Sequelize} = require('sequelize')
+require('dotenv').config()
 
 const sequelize = new Sequelize({
     dialect: 'sqlite',
@@ -9,6 +10,7 @@ async function main(){
     try {
         await sequelize.authenticate()
         await sequelize.sync()
+        // await sequelize.sync({force:true})
     } catch (error) {
         console.log(error)
     }
@@ -16,5 +18,3 @@ async function main(){
 main()
 
 module.exports = sequelize
-
-// require('../models/User')
