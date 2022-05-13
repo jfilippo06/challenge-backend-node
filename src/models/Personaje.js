@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize')
 const sequelize = require('../database/db')
+const Pelicula = require('./Pelicula')
 
 const Personaje = sequelize.define('Personaje', {
     imagen: {
@@ -18,5 +19,8 @@ const Personaje = sequelize.define('Personaje', {
         type: DataTypes.STRING,
     },
 })
+
+Personaje.belongsToMany(Pelicula, { through: 'PersonajePelicula'})
+Pelicula.belongsToMany(Personaje, { through: 'PersonajePelicula'})
 
 module.exports = Personaje

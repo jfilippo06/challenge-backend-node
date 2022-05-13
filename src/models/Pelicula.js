@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize')
 const sequelize = require('../database/db')
+const Personaje = require('./Personaje')
 
 const Pelicula = sequelize.define('Pelicula', {
     imagen: {

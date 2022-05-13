@@ -1,4 +1,4 @@
-const User = require("../models/User")
+const Usuario = require("../models/Usuario")
 
 const welcome = (req,res) => {
     return res.json({
@@ -7,10 +7,10 @@ const welcome = (req,res) => {
 }
 
 const register = async (req,res) => {
-    const {userName,email} = req.body
+    const {nombreUsuario, correo} = req.body
     const usuario = await User.create({
-        userName,
-        email
+        nombreUsuario,
+        correo
     })
     res.send(usuario)
 }

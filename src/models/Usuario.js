@@ -1,13 +1,13 @@
 const {DataTypes} = require('sequelize')
 const sequelize = require('../database/db')
 
-const User = sequelize.define('User', {
-    userName: {
+const Usuario = sequelize.define('Usuario', {
+    nombreUsuario: {
         type: DataTypes.STRING,
     },
-    email: {
+    correo: {
         type: DataTypes.STRING,
     }
 })
 
-module.exports = User
+module.exports = Usuario
