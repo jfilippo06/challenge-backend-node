@@ -1,4 +1,4 @@
-const Usuario = require("../models/Usuario")
+// const Usuario = require("../models/Usuario")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { validationResult } = require("express-validator")
@@ -21,13 +21,13 @@ const register = async (req,res) => {
     const hash = await bcrypt.hash(password, salt)
 
     try {
-        const usuario = await Usuario.create({
-            nombreUsuario,
-            correo,
-            password: hash,
-        }).then(user => {
-            const token = jwt.sign()
-        })
+        // const usuario = await Usuario.create({
+        //     nombreUsuario,
+        //     correo,
+        //     password: hash,
+        // }).then(user => {
+        //     const token = jwt.sign()
+        // })
         return res.send(usuario)
     } catch (error) {
         return res.json({"error":error})
