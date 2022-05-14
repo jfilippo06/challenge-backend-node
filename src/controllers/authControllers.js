@@ -1,4 +1,7 @@
 const Usuario = require("../models/Usuario")
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { validationResult } = require("express-validator")
 
 const welcome = (req,res) => {
     return res.json({
@@ -7,12 +10,28 @@ const welcome = (req,res) => {
 }
 
 const register = async (req,res) => {
-    const {nombreUsuario, correo} = req.body
-    const usuario = await User.create({
-        nombreUsuario,
-        correo
-    })
-    res.send(usuario)
+
+    const errors = validationResult(req)
+    if (!errors.isEmpty()){
+        return res.json({"error":errors.array()})
+    }
+
+    const {nombreUsuario, correo, password} = req.body
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(password, salt)
+
+    try {
+        const usuario = await Usuario.create({
+            nombreUsuario,
+            correo,
+            password: hash,
+        }).then(user => {
+            const token = jwt.sign()
+        })
+        return res.send(usuario)
+    } catch (error) {
+        return res.json({"error":error})
+    }
 }
 
 module.exports = {
