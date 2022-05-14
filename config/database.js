@@ -1,8 +1,8 @@
 require('dotenv').config()
 
 module.exports = {
-    dialect: process.env.DIALECT,
-    storage: process.env.URI,
+    dialect: process.env.DB_DIALECT,
+    storage: process.env.DB_URI,
 
     seederStorage: 'sequelize',
     seederStorageTableName: 'seeds',
