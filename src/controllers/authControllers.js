@@ -58,7 +58,7 @@ const login = async (req,res) => {
                 })
             }
             else{
-                res.status(404).json({'error':'Password no coinsiden'})
+                res.status(404).json({'error':'Contraseña no coinside'})
             }
         }
     })
