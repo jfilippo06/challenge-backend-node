@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Pelicula.belongsTo(models.Usuario)
+      Pelicula.belongsToMany(models.Personaje, {through:'PersonajePeliculas'})
+      Pelicula.belongsToMany(models.Genero, {through:'PeliculaGeneros'})
     }
   }
   Pelicula.init({
@@ -18,8 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     titulo: DataTypes.STRING,
     fecha: DataTypes.DATE,
     calificacion: DataTypes.NUMBER,
-    usuarioId: DataTypes.NUMBER,
-    personajeId: DataTypes.NUMBER
   }, {
     sequelize,
     modelName: 'Pelicula',

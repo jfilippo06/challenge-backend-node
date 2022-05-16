@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Genero.belongsTo(models.Usuario)
+      Genero.belongsToMany(models.Pelicula, {through:'PeliculaGeneros'})
     }
   }
   Genero.init({
     nombre: DataTypes.STRING,
     edad: DataTypes.NUMBER,
-    usuarioId: DataTypes.NUMBER,
-    personajeId: DataTypes.NUMBER
   }, {
     sequelize,
     modelName: 'Genero',

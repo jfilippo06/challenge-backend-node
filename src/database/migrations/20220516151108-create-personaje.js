@@ -34,17 +34,6 @@ module.exports = {
         },
         allowNull: false
       },
-      peliculaId: [{
-        type: Sequelize.NUMBER,
-        references: {
-          model: {
-            tableName: 'Peliculas',
-            schema: 'schema'
-          },
-          key: 'id'
-        },
-        allowNull: false
-      }],
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

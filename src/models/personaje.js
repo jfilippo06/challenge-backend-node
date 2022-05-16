@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Personaje.belongsTo(models.Usuario)
+      Personaje.belongsToMany(models.Pelicula, {through:'PersonajePeliculas'})
     }
   }
   Personaje.init({
@@ -19,8 +21,6 @@ module.exports = (sequelize, DataTypes) => {
     edad: DataTypes.NUMBER,
     peso: DataTypes.STRING,
     historia: DataTypes.STRING,
-    usuarioId: DataTypes.NUMBER,
-    peliculaId: DataTypes.NUMBER
   }, {
     sequelize,
     modelName: 'Personaje',

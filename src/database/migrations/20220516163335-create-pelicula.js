@@ -31,17 +31,6 @@ module.exports = {
         },
         allowNull: false
       },
-      personajeId: [{
-        type: Sequelize.NUMBER,
-        references: {
-          model: {
-            tableName: 'Personajes',
-            schema: 'schema'
-          },
-          key: 'id'
-        },
-        allowNull: false
-      }],
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
