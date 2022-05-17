@@ -38,7 +38,46 @@ const crearPersonaje = async (req,res) => {
     .catch(error => res.status(500).json(error))
 }
 
-const editarPersonaje = (req,res) => {}
+const editarPersonaje = async (req,res) => {
+    const {id} = req.params
+    const { imagen, nombre, edad, peso, historia, Peliculas } = req.body
+    
+    try {
+        const personaje = await Personaje.findOne({
+            where: {
+                UsuarioId: req.user.user.id,
+                id: id,
+            },
+        })
+        const pelicula = await Pelicula.findOne({
+            where: {
+                UsuarioId: req.user.user.id,
+                id: id,
+            },
+        })
+
+        personaje.imagen = imagen
+        personaje.nombre = nombre
+        personaje.edad = edad
+        personaje.peso = peso
+        personaje.historia = historia
+        pelicula.imagen = Peliculas[0].imagen
+        pelicula.titulo = Peliculas[0].titulo
+        pelicula.fecha = Peliculas[0].fecha
+        pelicula.calificacion = Peliculas[0].calificacion
+        await personaje.save()
+        await pelicula.save()
+
+        res.json({
+            personaje:personaje,
+            pelicula:pelicula
+        })
+        
+    } catch (error) {
+        return res.json(error.message)
+    }
+
+}
 
 const eliminarPersonaje = async (req,res) => {
     const {id} = req.params
