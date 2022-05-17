@@ -5,10 +5,10 @@ const obtenerPersonajes = async (req,res) => {
         where: {
             UsuarioId: req.user.user.id
         },
-        attributes: ['imagen','nombre'],
+        attributes: ['id','imagen','nombre'],
     })
-    .then(result => res.json(result))
-    .catch(error => res.json(error))
+    .then(result => res.status(200).json(result))
+    .catch(error => res.status(500).json(error))
 }
 
 const crearPersonaje = async (req,res) => {
@@ -34,11 +34,45 @@ const crearPersonaje = async (req,res) => {
     }, {
         include: Pelicula
     })
-    .then(personaje => res.json(personaje))
-    .catch(error => res.json(error))
+    .then(personaje => res.status(200).json(personaje))
+    .catch(error => res.status(500).json(error))
+}
+
+const editarPersonaje = (req,res) => {}
+
+const eliminarPersonaje = async (req,res) => {
+    const {id} = req.params
+
+    try {
+        const personaje = await Personaje.findOne({
+            where: {
+                UsuarioId: req.user.user.id,
+                id: id,
+            },
+        })
+        const pelicula = await Pelicula.findOne({
+            where: {
+                UsuarioId: req.user.user.id,
+                id: id,
+            },
+        })
+
+        if(!personaje){
+            if(!pelicula) throw new Error('id no encotrado')
+        }
+        
+        pelicula.destroy()
+        personaje.destroy()
+        return res.status(204).json({'id':'eliminado correctamente'})
+
+    } catch (error) {
+        return res.json(error.message)
+    }
 }
 
 module.exports = {
     obtenerPersonajes,
     crearPersonaje,
+    editarPersonaje,
+    eliminarPersonaje,
 }
