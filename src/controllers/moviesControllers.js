@@ -96,7 +96,40 @@ const editarPelicula = async (req,res) => {
     }
 }
 
-const eliminarPelicula = async (req,res) => {}
+const eliminarPelicula = async (req,res) => {
+    const {id} = req.params
+
+    try {
+        const pelicula = await Pelicula.findOne({
+            where: {
+                UsuarioId: req.user.user.id,
+                id: id,
+            },
+        })
+        const personaje = await Personaje.findOne({
+            where: {
+                UsuarioId: req.user.user.id,
+                id: id,
+            },
+        })
+        const genero = await Genero.findOne({
+            where: {
+                UsuarioId: req.user.user.id,
+                id: id,
+            },
+        })
+
+        if(!pelicula && !personaje && !genero) throw new Error('id no encotrado')
+        
+        pelicula.destroy()
+        personaje.destroy()
+        genero.destroy()
+        return res.status(204).json({'id':'eliminado correctamente'})
+
+    } catch (error) {
+        return res.json(error.message)
+    }
+}
 
 module.exports = {
     obtenerPeliculas,

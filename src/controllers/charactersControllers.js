@@ -96,9 +96,7 @@ const eliminarPersonaje = async (req,res) => {
             },
         })
 
-        if(!personaje){
-            if(!pelicula) throw new Error('id no encotrado')
-        }
+        if(!pelicula && !personaje) throw new Error('id no encotrado')
         
         pelicula.destroy()
         personaje.destroy()
