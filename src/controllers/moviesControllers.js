@@ -12,8 +12,8 @@ const obtenerPeliculas = async (req,res) => {
 }
 
 const crearPelicula = async (req,res) => {
-    const { imagen, titulo, fecha, calificacion, Personajes, Generos} = req.body
     const {id} = req.user.user 
+    const { imagen, titulo, fecha, calificacion, Personajes, Generos} = req.body
     await Pelicula.create({
         imagen,
         titulo,
@@ -47,7 +47,53 @@ const crearPelicula = async (req,res) => {
 }
 
 const editarPelicula = async (req,res) => {
+    const {id} = req.params
+    const { imagen, titulo, fecha, calificacion, Personajes, Generos} = req.body
     
+    try {
+        const pelicula = await Pelicula.findOne({
+            where: {
+                UsuarioId: req.user.user.id,
+                id: id,
+            },
+        })
+        const personaje = await Personaje.findOne({
+            where: {
+                UsuarioId: req.user.user.id,
+                id: id,
+            },
+        })
+        const genero = await Genero.findOne({
+            where: {
+                UsuarioId: req.user.user.id,
+                id: id,
+            },
+        })
+
+        pelicula.imagen = imagen
+        pelicula.titulo = titulo
+        pelicula.fecha = fecha
+        pelicula.calificacion = calificacion
+        personaje.imagen = Personajes[0].imagen
+        personaje.nombre = Personajes[0].nombre
+        personaje.edad = Personajes[0].edad
+        personaje.historia = Personajes[0].historia
+        genero.nombre = Generos[0].nombre
+        genero.imagen = Generos[0].imagen
+        
+        await pelicula.save()
+        await personaje.save()
+        await genero.save()
+
+        res.json({
+            personaje:personaje,
+            pelicula:pelicula,
+            genero:genero
+        })
+        
+    } catch (error) {
+        return res.json(error.message)
+    }
 }
 
 const eliminarPelicula = async (req,res) => {}

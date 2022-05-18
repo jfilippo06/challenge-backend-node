@@ -5,7 +5,7 @@ const { obtenerPeliculas, crearPelicula, editarPelicula, eliminarPelicula } = re
 
 router.get('/', auth, obtenerPeliculas)
 router.post('/', auth, crearPelicula)
-router.put('/', auth, editarPelicula)
-router.delete('/', auth, eliminarPelicula)
+router.put('/:id', auth, editarPelicula)
+router.delete('/:id', auth, eliminarPelicula)
 
 module.exports = router
