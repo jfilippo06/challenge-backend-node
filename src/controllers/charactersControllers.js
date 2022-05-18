@@ -118,5 +118,4 @@ module.exports = {
     crearPersonaje,
     editarPersonaje,
     eliminarPersonaje,
-    buscarPersonaje,
 }
