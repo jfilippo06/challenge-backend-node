@@ -109,10 +109,6 @@ const eliminarPersonaje = async (req,res) => {
     }
 }
 
-const buscarPersonaje = async (req,res) => {
-    res.json(req.query)
-}
-
 module.exports = {
     obtenerPersonajes,
     crearPersonaje,
