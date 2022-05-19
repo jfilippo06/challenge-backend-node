@@ -5,7 +5,6 @@ const auth = require('../../config/authConfig')
 const { validationResult } = require("express-validator")
 
 const register = async (req,res) => {
-
     const errors = validationResult(req)
     if (!errors.isEmpty()){
         return res.json({"error":errors.array()})
@@ -15,24 +14,35 @@ const register = async (req,res) => {
     const salt = await bcrypt.genSalt(Number.parseInt(auth.rounds))
     const hash = await bcrypt.hash(password, salt)
 
-    await Usuario.create({
-        name,
-        email,
-        password: hash,
-    }).then(user =>{
-        const token = jwt.sign({user:user}, auth.secret, {expiresIn:auth.expired})
-        res.json({
-            user:user,
-            token:token
+    try {
+        const usuario = await Usuario.findOne({
+            where: {
+                email:email
+            }
         })
-    })
-    .catch(error => {
-        res.status(500).json({'error':error})
-    })
+    
+        if(usuario) throw new Error('Usuario ya existe')
+    
+        await Usuario.create({
+            name,
+            email,
+            password: hash,
+        }).then(user =>{
+            const token = jwt.sign({user:user}, auth.secret, {expiresIn:auth.expired})
+            res.json({
+                user:user,
+                token:token
+            })
+        })
+        .catch(error => {
+            res.status(500).json({'error':error})
+        })
+    } catch (error) {
+        return res.json(error.message)
+    }
 }
 
 const login = async (req,res) => {
-
     const errors = validationResult(req)
     if (!errors.isEmpty()){
         return res.json({"error":errors.array()})
