@@ -1,4 +1,5 @@
 const {Personaje, Pelicula} = require('../models/index')
+const { validationResult } = require("express-validator")
 
 const obtenerPersonajes = async (req,res) => {
     await Personaje.findAll({
@@ -12,6 +13,11 @@ const obtenerPersonajes = async (req,res) => {
 }
 
 const crearPersonaje = async (req,res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()){
+        return res.json({"error":errors.array()})
+    }
+
     const { imagen, nombre, edad, peso, historia, Peliculas } = req.body
     const {id} = req.user.user 
     await Personaje.create({
@@ -39,6 +45,11 @@ const crearPersonaje = async (req,res) => {
 }
 
 const editarPersonaje = async (req,res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()){
+        return res.json({"error":errors.array()})
+    }
+
     const {id} = req.params
     const { imagen, nombre, edad, peso, historia, Peliculas } = req.body
     
