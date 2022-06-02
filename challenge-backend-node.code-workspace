@@ -4,5 +4,22 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.words": [
+			"charaters",
+			"crear",
+			"edad",
+			"editar",
+			"eliminar",
+			"historia",
+			"imagen",
+			"imangen",
+			"middlewares",
+			"nombre",
+			"obtener",
+			"openapi",
+			"Personaje",
+			"Personajes"
+		]
+	}
 }
